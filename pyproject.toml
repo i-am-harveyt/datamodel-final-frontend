@@ -1,0 +1,20 @@
+[project]
+name = "sptk"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "i-am-harveyt", email = "haotingtong30@gmail.com"},
+]
+dependencies = ["gradio>=5.9.1"]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[project.optional-dependencies]
+dev = [
+    "pyright>=1.1.391",
+    "ruff>=0.8.4",
+]
+[tool.pdm]
+distribution = false
