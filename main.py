@@ -1,65 +1,45 @@
-import json
+from query import answer_question
 import gradio as gr
+import re
 
 
-def header():
-    return """
-    <tr>
-        <th>Name</th>
-        <th>Artist</th>
-        <th>Spotify Rank</th>
-        <th>Tiktok Rank</th>
-    </tr>
+def fetch(input: str) -> str:
     """
+    This function ask question with `input`.
+
+    Args:
+        input (str) the question to ask
+    """
+    return answer_question(input)
 
 
-def fetch(input: str) -> list[dict[str, str | int]]:
-    f"""{input}"""
-    with open("./static/output.json") as f:
-        lines = f.readlines()
-    return json.loads("\n".join(lines))
+def url_sub(data: str) -> str:
+    """
+    This function substitude spotify ids with urls to spotify with regex.
+
+    Args:
+        data (str): string contains "Spotify ID: <id>"
+
+    Returns:
+        str: processed data.
+    """
+    data = re.sub(
+    r"\(Spotify ID: ([a-zA-Z0-9]+)\)", 
+    r"https://open.spotify.com/track/\1", 
+    data)
+    return data
 
 
-def body(data: list[dict[str, str | int]]) -> str:
-    return "".join(
-        [
-            f"""
-            <tr>
-                <td>
-                    <a
-                    href="https://open.spotify.com/track/{d["spotify_id"]}"
-                    target="_blank"
-                    >
-                    {d["name"]}
-                    </a>
-
-                </td>
-                <td>
-                       {d["artists"]}
-                </td>
-                <td>
-                       {d["daily_rank"]}
-                </td>
-                <td>
-                       {d["is_explicit"]}
-                </td>
-            </tr>
-        """
-            for d in data
-        ]
-    )
-
-
-def fn(sentence):
-    data = fetch(sentence)
-    return f"<table>{header()}{body(data)}</table>"
+def fn(query):
+    data = fetch(query)
+    return url_sub(data)
 
 
 if __name__ == "__main__":
     demo = gr.Interface(
         fn=fn,
         inputs=["text"],
-        outputs=["html"],
+        outputs=["markdown"],
     )
 
     demo.launch()

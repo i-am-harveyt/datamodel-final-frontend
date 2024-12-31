@@ -5,7 +5,7 @@ description = "Default template for PDM package"
 authors = [
     {name = "i-am-harveyt", email = "haotingtong30@gmail.com"},
 ]
-dependencies = ["gradio>=5.9.1"]
+dependencies = ["gradio>=5.9.1", "google-cloud-bigquery>=3.27.0", "google-cloud-aiplatform>=1.75.0", "vertexai>=1.43.0"]
 requires-python = "==3.12.*"
 readme = "README.md"
 license = {text = "MIT"}
