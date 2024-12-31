@@ -1,0 +1,4 @@
+PROJECT_ID = ""
+LOCATION = ""
+CREDENTIAL_PATH = ""
+

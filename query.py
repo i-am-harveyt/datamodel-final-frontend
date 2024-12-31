@@ -2,14 +2,13 @@ from vertexai.preview.generative_models import GenerativeModel
 from google.cloud import bigquery
 from google.oauth2 import service_account
 from google.cloud import aiplatform
+from constants import CREDENTIAL_PATH, LOCATION, PROJECT_ID
 import os
 import requests
 
 
-PROJECT_ID = ""
-LOCATION = ""
 aiplatform.init(project=PROJECT_ID, location=LOCATION)
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = ""  # credential path
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = CREDENTIAL_PATH
 
 
 def answer_question_gemini(prompt):  # Gemini回答
