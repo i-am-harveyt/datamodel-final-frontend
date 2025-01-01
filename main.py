@@ -24,7 +24,7 @@ def url_sub(data: str) -> str:
         str: processed data.
     """
     data = re.sub(
-    r"\(Spotify ID: ([a-zA-Z0-9]+)\)", 
+    r"\(spotify_id: ([a-zA-Z0-9]+)\)", 
     r"https://open.spotify.com/track/\1", 
     data)
     return data
